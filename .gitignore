@@ -43,3 +43,13 @@ next-env.d.ts
 # others
 tasks/
 design/
+
+# stray lockfile (project uses npm)
+pnpm-lock.yaml
+
+# generated proposal export
+*.pdf
+
+# local proposal drafts
+پروپزال.md
+پروپزال-دوم.md

@@ -62,8 +62,11 @@ export function useExport() {
       const anchor = document.createElement("a");
       anchor.href = url;
       anchor.download = responseFilename(response, `creative-rtl.${format}`);
+      anchor.style.display = "none";
+      document.body.append(anchor);
       anchor.click();
-      window.setTimeout(() => URL.revokeObjectURL(url), 0);
+      anchor.remove();
+      window.setTimeout(() => URL.revokeObjectURL(url), 30_000);
       setStatus("idle");
       controllerRef.current = null;
       return true;

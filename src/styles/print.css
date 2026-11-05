@@ -36,7 +36,7 @@ body {
 }
 
 .paper :where(h1, h2, h3, h4) { break-after: avoid; }
-.paper :where(figure, blockquote, .block, .block--mermaid, img, table) { break-inside: avoid; }
+.paper :where(figure, blockquote, .block, .block--mermaid, img) { break-inside: avoid; }
 .paper :where(p, li) { orphans: 3; widows: 3; }
 .paper thead { display: table-header-group; }
 .paper tr { break-inside: avoid; }

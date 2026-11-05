@@ -89,6 +89,7 @@ export async function POST(request: Request): Promise<Response> {
       },
     });
   } catch (error) {
+    console.error("[export] failed", error);
     const message = error instanceof Error ? error.message.toLowerCase() : "";
     return error instanceof Error && /timeout|timed out/u.test(message)
       ? errorResponse("export_timeout", 504)

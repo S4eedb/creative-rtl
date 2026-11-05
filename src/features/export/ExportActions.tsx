@@ -25,15 +25,16 @@ export function ExportActions({ settings, previewRef, onCopyShare, onMessage }: 
   const working = status === "working";
 
   const download = async (format: "pdf" | "png") => {
-    const ok = await start(format, settings);
-    if (ok) {
+    const result = await start(format, settings);
+    if (result === true) {
       onMessage(format === "pdf" ? "PDF آماده شد." : "تصویر آماده شد.", "success");
-    } else if (typeof ok === "string") {
-      onMessage(errorMessage(ok), "error");
-      if (format === "pdf" && ok !== "rate_limited" && ok !== "payload_too_large" && ok !== "export_too_large") {
-        const { printPreview } = await import("./print-fallback");
-        if (previewRef.current) await printPreview(previewRef.current, settings.title ?? "creative-rtl");
-      }
+      return;
+    }
+    if (typeof result !== "string") return;
+    onMessage(errorMessage(result), "error");
+    if (format === "pdf" && result !== "rate_limited" && result !== "payload_too_large" && result !== "export_too_large") {
+      const { printPreview } = await import("./print-fallback");
+      if (previewRef.current) await printPreview(previewRef.current, settings.title ?? "creative-rtl");
     }
   };
 
